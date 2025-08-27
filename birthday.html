@@ -1,505 +1,172 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
-  <title>Happy Birthday — Sambhav Singh 🎉</title>
-
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-
+  <meta charset="UTF-8">
+  <title>Happy Birthday Sambhav Singh 🎉</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    :root{
-      --bg-deep:#051428;
-      --bg-mid:#0b2a45;
-      --glass: rgba(255,255,255,0.06);
-      --accent1:#ff6b9f;
-      --accent2:#60a5fa;
-      --accent3:#7ef5d8;
-      --muted: #bcd3e6;
-      --ui: #f8fafc;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%; margin:0; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale}
-    body{
-      font-family: 'Poppins', system-ui, -apple-system, "Segoe UI", Roboto, Arial;
-      background: radial-gradient(800px 500px at 10% 10%, rgba(96,165,250,0.05), transparent),
-                  radial-gradient(800px 600px at 95% 90%, rgba(126,245,216,0.03), transparent),
-                  linear-gradient(180deg, var(--bg-deep), var(--bg-mid));
-      color:var(--ui);
-      overflow:hidden;
-      display:flex; align-items:center; justify-content:center;
-      padding:20px;
+    body {
+      margin: 0;
+      overflow: hidden;
+      background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+      font-family: 'Poppins', sans-serif;
+      color: #fff;
+      text-align: center;
     }
 
-    /* Canvas layers - single visual canvas for stars/fireworks */
-    canvas#scene{ position:fixed; inset:0; width:100vw; height:100vh; z-index:0; display:block; pointer-events:none; }
-
-    /* Card */
-    .card{
-      position:relative;
-      z-index:6;
-      width:min(980px,96vw);
-      border-radius:20px;
-      padding:22px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
-      border:1px solid rgba(255,255,255,0.05);
-      box-shadow: 0 12px 50px rgba(0,0,0,0.55);
-      backdrop-filter: blur(6px) saturate(120%);
-      text-align:center;
-    }
-    h1{ margin:6px 0 6px; font-family:'Pacifico',cursive; font-size:clamp(28px,6vw,56px); letter-spacing:.2px; }
-    .name{ display:block; font-weight:700; font-size:clamp(20px,4vw,38px);
-           background:linear-gradient(90deg,var(--accent1),var(--accent2),var(--accent3)); -webkit-background-clip:text; color:transparent; }
-    p.lead{ margin:6px auto 12px; color:var(--muted); max-width:70ch; font-size:clamp(14px,2.2vw,18px) }
-
-    /* Cake (center) */
-    .cake-wrap{ display:flex; align-items:center; justify-content:center; margin-top:8px; margin-bottom:6px; }
-    .cake{
-      width:240px; height:160px; position:relative; transform-origin:center; 
-    }
-    /* Cake body */
-    .cake .plate{ position:absolute; left:50%; transform:translateX(-50%); bottom:-8px; width:320px; height:22px; border-radius:50%; background:linear-gradient(90deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02)); filter:blur(1px); }
-    .cake .tier{
-      position:absolute; left:50%; transform:translateX(-50%); bottom:12px; width:220px; height:108px; border-radius:22px;
-      background: linear-gradient(180deg, #fff8 0%, #ffdddb 100%);
-      box-shadow: inset 0 8px 24px rgba(255,255,255,0.06), 0 18px 40px rgba(0,0,0,0.5);
-      overflow:visible;
-    }
-    .frost{
-      position:absolute; left:50%; transform:translateX(-50%); bottom:86px; width:252px; height:28px; border-radius:14px;
-      background: linear-gradient(90deg, var(--accent1), var(--accent2));
-      filter: blur(0.3px);
-    }
-    .candles{ position:absolute; left:50%; transform:translateX(-50%); bottom:110px; display:flex; gap:9px; align-items:flex-end; justify-content:center; }
-    .candle{ width:8px; height:42px; border-radius:3px; background:linear-gradient(180deg,#fff,#ffe); box-shadow:0 2px 6px rgba(0,0,0,0.3); position:relative; display:inline-block }
-    .flame{ position:absolute; left:50%; top:-14px; transform:translateX(-50%); width:14px; height:18px; border-radius:50% 50% 40% 40% / 60% 60% 40% 40%;
-            background: radial-gradient(circle at 30% 30%, #fff 0%, #fff0 12%), linear-gradient(180deg, #ffd166, #ff7ac6); filter:drop-shadow(0 10px 18px rgba(255,115,170,0.28)); }
-    /* subtle flame scale flicker (js will vary scale for natural) */
-    .flame{ transform-origin:center bottom; animation: flame 900ms ease-in-out infinite; }
-    @keyframes flame{ 0%{ transform:translateX(-50%) scale(1) } 50%{ transform:translateX(-50%) scale(1.06) } 100%{ transform:translateX(-50%) scale(1) } }
-
-    /* Floating elements container (GPU transform) */
-    .float-container{ position:fixed; inset:0; z-index:3; pointer-events:none; overflow:visible; }
-    .float{
-      position:absolute; bottom:-160px; will-change:transform, opacity;
-      transform:translateY(0);
-      filter: drop-shadow(0 8px 18px rgba(0,0,0,0.45));
-      transition: transform linear, opacity linear;
-      opacity:0;
+    h1 {
+      font-family: 'Pacifico', cursive;
+      font-size: 3rem;
+      color: #fff;
+      text-shadow: 0 0 20px #ff66cc, 0 0 40px #ff3399;
+      margin-top: 20px;
+      animation: glow 2s infinite alternate;
     }
 
-    /* small helpers for different floats */
-    .balloon svg{ display:block; width:100%; height:100% }
-    .heart svg{ display:block; width:100%; height:100% }
-    .flower svg{ display:block; width:100%; height:100% }
-
-    /* entrance for card */
-    .card{ transform: translateY(18px) scale(.99); opacity:0; animation: cardIn 700ms cubic-bezier(.2,.9,.2,1) forwards; }
-    @keyframes cardIn{ to{ transform:none; opacity:1 } }
-
-    /* mobile adjustments */
-    @media (max-width:520px){
-      .cake{ width:180px; height:125px } .cake .tier{ width:160px; height:92px } .candles{ gap:6px } h1{ font-size:36px }
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #ff66cc, 0 0 20px #ff3399; }
+      to { text-shadow: 0 0 30px #ff99cc, 0 0 60px #ff66cc; }
     }
 
-    /* reduced motion */
-    @media (prefers-reduced-motion: reduce){ *{animation:none!important; transition:none!important} }
+    .portrait {
+      width: 220px;
+      height: 220px;
+      border-radius: 20px;
+      overflow: hidden;
+      margin: 20px auto;
+      border: 5px solid #fff;
+      box-shadow: 0 0 40px rgba(255, 182, 193, 0.9);
+      animation: pulse 3s infinite alternate;
+    }
+
+    .portrait img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    @keyframes pulse {
+      from { box-shadow: 0 0 20px rgba(255, 182, 193, 0.6); }
+      to { box-shadow: 0 0 50px rgba(255, 105, 180, 1); }
+    }
+
+    .cake {
+      font-size: 4rem;
+      margin: 20px 0;
+      animation: flicker 1.5s infinite alternate;
+    }
+
+    @keyframes flicker {
+      from { text-shadow: 0 0 10px orange, 0 0 20px gold; }
+      to { text-shadow: 0 0 30px red, 0 0 60px yellow; }
+    }
+
+    canvas {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .floating {
+      position: absolute;
+      font-size: 2rem;
+      animation: floatUp 10s linear infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes floatUp {
+      from { transform: translateY(100vh) scale(0.8); opacity: 1; }
+      to { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+    }
   </style>
 </head>
 <body>
-
-  <canvas id="scene"></canvas>
-
-  <div class="card" role="main" aria-label="Birthday wish for Sambhav Singh">
-    <h1>Happy Birthday</h1>
-    <div class="name">Shambhav Singh</div>
-    <p class="lead">Wishing you the most magical year ahead — full of laughter, love, and big wins. You deserve the world! 🥳</p>
-
-    <div class="cake-wrap" aria-hidden="true">
-      <div class="cake" id="cake">
-        <div class="frost"></div>
-        <div class="tier"></div>
-        <div class="candles" id="candles"></div>
-        <div class="plate"></div>
-      </div>
-    </div>
+  <h1>🎉 Happy Birthday Sambhav Singh 🎉</h1>
+  <div class="portrait">
+    <img src="photo.jpg" alt="Sambhav's Photo">
   </div>
+  <div class="cake">🎂🎂🎂</div>
 
-  <div class="float-container" id="floatContainer" aria-hidden="true"></div>
+  <canvas id="fireworks"></canvas>
 
-<script>
-/* ===========================
-   Fast, efficient scene manager
-   - single canvas "scene" for stars + fireworks
-   - CSS-driven floats (balloons/hearts/flowers) using transform
-   =========================== */
+  <script>
+    // Fireworks animation
+    const canvas = document.getElementById("fireworks");
+    const ctx = canvas.getContext("2d");
+    let particles = [];
+    resizeCanvas();
 
-const canvas = document.getElementById('scene');
-const ctx = canvas.getContext('2d', { alpha: true, desynchronized: true });
-let DPR = Math.max(1, window.devicePixelRatio || 1);
-
-function resize() {
-  DPR = Math.max(1, window.devicePixelRatio || 1);
-  canvas.width = innerWidth * DPR;
-  canvas.height = innerHeight * DPR;
-  canvas.style.width = innerWidth + 'px';
-  canvas.style.height = innerHeight + 'px';
-  ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
-}
-window.addEventListener('resize', resize, { passive: true });
-resize();
-
-/* ---------- STARFIELD ---------- */
-const stars = [];
-function initStars(){
-  stars.length = 0;
-  const count = Math.max(60, Math.round((innerWidth * innerHeight) / 90000));
-  for(let i=0;i<count;i++){
-    stars.push({
-      x: Math.random()*innerWidth,
-      y: Math.random()*innerHeight,
-      r: Math.random()*1.6 + 0.2,
-      tw: Math.random()*Math.PI*2,
-      speed: 0.0006 + Math.random()*0.0012
-    });
-  }
-}
-initStars();
-
-/* ---------- Firework particles (LOW COUNT, trails via alpha overlay) ---------- */
-const particles = []; // active particles
-const fireworks = []; // rocket-like that explode into particles
-
-function spawnFirework(x, y){
-  // spawn a "rocket" that will explode after a short travel
-  fireworks.push({
-    x: x,
-    y: innerHeight + 30,
-    tx: x,
-    ty: y,
-    vx: (Math.random()*0.6 - 0.3),
-    vy: - (8 + Math.random()*5),
-    life: 20 + Math.random()*14,
-    hue: Math.random()*360
-  });
-}
-
-function explode(x, y, hue){
-  const count = 40 + Math.round(30 * Math.random()); // moderate
-  for(let i=0;i<count;i++){
-    const angle = Math.random()*Math.PI*2;
-    const speed = (Math.random()*4.2 + 1.6) * (0.6 + Math.random()*0.9);
-    particles.push({
-      x: x,
-      y: y,
-      vx: Math.cos(angle)*speed,
-      vy: Math.sin(angle)*speed,
-      life: 80 + Math.round(Math.random()*80),
-      age: 0,
-      hue: hue + (Math.random()*36 - 18),
-      size: 1 + Math.random()*2.6
-    });
-  }
-}
-
-/* ---------- update/draw ---------- */
-let lastT = performance.now();
-function step(dt){
-  // stars update
-  for(const s of stars){
-    s.tw += s.speed * dt;
-    // small drift
-    s.x += Math.sin(s.tw) * 0.01;
-    s.y += Math.cos(s.tw*0.6) * 0.01;
-    if(s.x < 0) s.x = innerWidth;
-    if(s.x > innerWidth) s.x = 0;
-  }
-
-  // fireworks rocket update
-  for(let i = fireworks.length-1; i>=0; i--){
-    const f = fireworks[i];
-    f.x += f.vx;
-    f.y += f.vy;
-    f.vy += 0.12; // gravity for rocket
-    f.life--;
-    if(f.life <= 0 || f.vy >= 0){
-      // explode
-      explode(f.x, f.y, f.hue);
-      fireworks.splice(i,1);
+    window.addEventListener("resize", resizeCanvas);
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
     }
-  }
 
-  // particles update
-  for(let i = particles.length-1; i>=0; i--){
-    const p = particles[i];
-    p.x += p.vx;
-    p.y += p.vy;
-    p.vy += 0.06; // gravity
-    // air resistance
-    p.vx *= 0.998;
-    p.vy *= 0.998;
-    p.age++;
-    if(p.age > p.life || p.y > innerHeight + 40){
-      particles.splice(i,1);
+    class Particle {
+      constructor(x, y, color, speed, angle) {
+        this.x = x;
+        this.y = y;
+        this.color = color;
+        this.speed = speed;
+        this.angle = angle;
+        this.alpha = 1;
+      }
+      update() {
+        this.x += Math.cos(this.angle) * this.speed;
+        this.y += Math.sin(this.angle) * this.speed;
+        this.speed *= 0.95;
+        this.alpha -= 0.01;
+      }
+      draw() {
+        ctx.globalAlpha = this.alpha;
+        ctx.fillStyle = this.color;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, 3, 0, Math.PI * 2);
+        ctx.fill();
+      }
     }
-  }
-}
 
-function draw(t){
-  // draw with motion-trail: draw a semi-transparent rect to slightly fade previous frame
-  ctx.globalCompositeOperation = 'source-over';
-  ctx.fillStyle = 'rgba(4,6,12,0.22)'; // slight darken retains trails; reduce alpha to increase trail length
-  ctx.fillRect(0,0,innerWidth,innerHeight);
-
-  // stars: soft radial glows
-  for(const s of stars){
-    const alpha = 0.25 + 0.6 * (0.5 + Math.sin(s.tw) * 0.5);
-    const g = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, s.r*6);
-    g.addColorStop(0, 'rgba(255,255,255,' + (alpha) + ')');
-    g.addColorStop(1, 'rgba(255,255,255,0)');
-    ctx.fillStyle = g;
-    ctx.beginPath();
-    ctx.arc(s.x, s.y, s.r*4, 0, Math.PI*2);
-    ctx.fill();
-  }
-
-  // fireworks rockets (small bright points)
-  for(const f of fireworks){
-    ctx.fillStyle = `hsl(${f.hue} 90% 70%)`;
-    ctx.beginPath();
-    ctx.arc(f.x, f.y, 2.2, 0, Math.PI*2);
-    ctx.fill();
-  }
-
-  // particles (glowing)
-  ctx.globalCompositeOperation = 'lighter';
-  for(const p of particles){
-    const lifeRatio = 1 - (p.age / p.life);
-    const alpha = Math.max(0, lifeRatio);
-    const size = p.size * (1 + (1-lifeRatio));
-    const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, size*4);
-    g.addColorStop(0, `hsla(${p.hue} 90% 60% ,${alpha})`);
-    g.addColorStop(0.6, `hsla(${p.hue} 90% 55% ,${alpha*0.5})`);
-    g.addColorStop(1, 'rgba(0,0,0,0)');
-    ctx.fillStyle = g;
-    ctx.beginPath();
-    ctx.arc(p.x, p.y, size*3, 0, Math.PI*2);
-    ctx.fill();
-  }
-  ctx.globalCompositeOperation = 'source-over';
-}
-
-/* ---------- looping ---------- */
-let rafId;
-function loop(now){
-  const dt = Math.min(40, now - lastT);
-  lastT = now;
-  step(dt);
-  draw(now);
-  rafId = requestAnimationFrame(loop);
-}
-requestAnimationFrame(loop);
-
-/* ---------- Auto-fire schedule (limited to keep perf) ---------- */
-let lastAuto = 0;
-function autoScheduler(t){
-  if(t - lastAuto > 9000 + Math.random()*6000){
-    lastAuto = t;
-    // launch 1-3 fireworks across screen spaced slightly
-    const count = 1 + Math.floor(Math.random()*2);
-    for(let i=0;i<count;i++){
-      const x = innerWidth*(0.15 + Math.random()*0.7);
-      const y = innerHeight*(0.12 + Math.random()*0.42);
-      setTimeout(()=> spawnFirework(x,y), i*220);
+    function createFirework(x, y) {
+      const colors = ["#ff0044", "#ffdd00", "#00ffcc", "#ff66ff", "#66aaff"];
+      for (let i = 0; i < 80; i++) {
+        let angle = Math.random() * Math.PI * 2;
+        let speed = Math.random() * 6 + 2;
+        let color = colors[Math.floor(Math.random() * colors.length)];
+        particles.push(new Particle(x, y, color, speed, angle));
+      }
     }
-  }
-  requestAnimationFrame(autoScheduler);
-}
-requestAnimationFrame(autoScheduler);
 
-/* ---------- initial celebration burst ---------- */
-setTimeout(()=>{
-  // small burst cluster center
-  spawnFirework(innerWidth*0.5, innerHeight*0.34);
-  setTimeout(()=> spawnFirework(innerWidth*0.3, innerHeight*0.36), 250);
-  setTimeout(()=> spawnFirework(innerWidth*0.7, innerHeight*0.30), 420);
-}, 500);
+    function animate() {
+      ctx.fillStyle = "rgba(0,0,0,0.2)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      particles.forEach((p, i) => {
+        p.update();
+        p.draw();
+        if (p.alpha <= 0) particles.splice(i, 1);
+      });
+      requestAnimationFrame(animate);
+    }
 
-/* ========== CSS FLOATS (GPU transforms) ========== */
-const floatContainer = document.getElementById('floatContainer');
+    setInterval(() => {
+      createFirework(Math.random() * canvas.width, Math.random() * canvas.height / 2);
+    }, 2000);
 
-// create a small pool of float templates (reused)
-function createFloat(type){
-  const el = document.createElement('div');
-  el.className = 'float ' + type;
-  // random horizontal starting left
-  const left = 6 + Math.random()*88;
-  el.style.left = left + 'vw';
-  // size
-  if(type === 'balloon') el.style.width = (36 + Math.random()*40) + 'px';
-  if(type === 'heart') el.style.width = (20 + Math.random()*28) + 'px';
-  if(type === 'flower') el.style.width = (28 + Math.random()*28) + 'px';
-  // inner SVG
-  if(type === 'balloon'){
-    const hue = Math.round(Math.random()*360);
-    el.innerHTML = `<svg viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg">
-      <ellipse cx="50" cy="55" rx="40" ry="50" fill="hsl(${hue} 82% 62%)"/>
-      <path d="M50 104 C46 118,54 118,50 135" stroke="rgba(255,255,255,0.9)" stroke-width="2" fill="none"/>
-    </svg>`;
-  } else if(type === 'heart'){
-    const hue = 340 + Math.random()*20;
-    el.innerHTML = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-      <path d="M50 86 L15 50 C-2 30, 20 5, 45 20 C50 23,55 23,60 20 C85 5,102 30,85 50 Z" fill="hsl(${hue} 85% 62%)"/>
-    </svg>`;
-  } else {
-    // flower, more delicate petals
-    const hue = 320 + Math.random()*80;
-    el.innerHTML = `<svg viewBox="0 0 120 160" xmlns="http://www.w3.org/2000/svg">
-      <g transform="translate(60,80)">
-        ${Array.from({length:6}).map((_,i)=>`<g transform="rotate(${i*60})"><path d="M0 0 C 18 -36, 36 -18, 0 -64 C -36 -18, -18 -36, 0 0 Z" fill="hsl(${hue} 70% 66%)"/></g>`).join('')}
-        <circle r="10" fill="hsl(46 90% 56%)"/>
-      </g>
-    </svg>`;
-  }
+    animate();
 
-  floatContainer.appendChild(el);
-
-  // set animation with CSS transform and easing for smoothness
-  // total duration depends on size & randomness
-  const dur = 7000 + Math.random()*9000;
-  const wobble = 12 + Math.random()*26;
-  // target translateY: move up beyond top
-  const translateY = innerHeight + 240;
-  // slight horizontal wobble using small chain of transforms over time by scheduling small transforms
-  // use setTimeout loops for incremental GPU transforms (keeps JS minimal)
-  requestAnimationFrame(()=> {
-    el.style.transition = `transform ${dur}ms cubic-bezier(.18,.9,.18,1), opacity 500ms linear`;
-    // small initial delay for natural staggering
-    const delay = Math.random()*600;
-    setTimeout(()=> {
-      el.style.opacity = '1';
-      // random rotation
-      const rot = Math.random()*30 - 15;
-      el.style.transform = `translate(${(Math.random()*wobble - wobble/2)}px, -${translateY}px) rotate(${rot}deg)`;
-      // gently fade out near end
-      setTimeout(()=> el.style.opacity = '0', dur - 900);
-      // cleanup
-      setTimeout(()=> el.remove(), dur + 80);
-    }, delay);
-  });
-}
-
-// periodically spawn floats but keep count low
-setInterval(()=> {
-  createFloat('balloon');
-  if(Math.random() > 0.48) createFloat('heart');
-  if(Math.random() > 0.55) createFloat('flower');
-}, 900);
-
-/* ---------- Cake candles creation & subtle JS flicker ---------- */
-const candlesEl = document.getElementById('candles');
-function makeCandles(n=5) {
-  candlesEl.innerHTML = '';
-  for(let i=0;i<n;i++){
-    const c = document.createElement('div');
-    c.className = 'candle';
-    // color and slight scale variance
-    c.style.height = (34 + Math.random()*12) + 'px';
-    const flame = document.createElement('div');
-    flame.className = 'flame';
-    flame.style.opacity = 0.98;
-    c.appendChild(flame);
-    candlesEl.appendChild(c);
-  }
-}
-makeCandles(6);
-
-// flicker effect via scale for natural feel
-(function flickerLoop(){
-  const flames = document.querySelectorAll('.flame');
-  flames.forEach(f => {
-    const s = 0.9 + Math.random() * 0.28;
-    f.style.transform = `translateX(-50%) scale(${s})`;
-    f.style.opacity = 0.86 + Math.random()*0.14;
-  });
-  setTimeout(flickerLoop, 140 + Math.random()*200);
-})();
-
-/* ---------- SOUND / melody (plays on first interaction if autoplay blocked) ---------- */
-let audioCtx = null;
-try {
-  audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-} catch(e) { audioCtx = null; }
-
-function playTone(freq, start, dur){
-  if(!audioCtx) return;
-  const o = audioCtx.createOscillator();
-  const g = audioCtx.createGain();
-  o.type = 'triangle';
-  o.frequency.value = freq;
-  g.gain.value = 0.0001;
-  g.gain.exponentialRampToValueAtTime(0.28, start + 0.02);
-  g.gain.exponentialRampToValueAtTime(0.0001, start + dur);
-  o.connect(g); g.connect(audioCtx.destination);
-  o.start(start); o.stop(start + dur + 0.02);
-}
-
-function playHappyBirthday(){
-  if(!audioCtx) return;
-  const A4 = 440;
-  const sem = n => A4 * Math.pow(2, n/12);
-  const N = { G5:sem(10), A5:sem(12), B5:sem(14), C6:sem(15), D6:sem(17) };
-  const seq = [
-    [N.G5, .36],[N.G5, .24],[N.A5, .6],[N.G5, .6],[N.C6, .6],[N.B5, 1.2],
-    [N.G5, .36],[N.G5, .24],[N.A5, .6],[N.G5, .6],[N.D6, .6],[N.C6, 1.2]
-  ];
-  let t = audioCtx.currentTime + 0.02;
-  for(const [f,d] of seq){ playTone(f, t, d); t += d * 1.02; }
-}
-
-// resume audio on gesture if suspended
-function ensureAudioOnGesture(){
-  if(!audioCtx) return;
-  if(audioCtx.state === 'suspended'){
-    const resume = ()=>{ audioCtx.resume(); playHappyBirthday(); window.removeEventListener('pointerdown', resume); };
-    window.addEventListener('pointerdown', resume, { once: true });
-  } else {
-    playHappyBirthday();
-  }
-}
-setTimeout(ensureAudioOnGesture, 600);
-
-/* ---------- interaction: tap produces a small celebration (one firework + few floats) ---------- */
-document.addEventListener('pointerdown', (e) => {
-  // spawn single firework at pointer
-  spawnFirework(e.clientX, Math.max(80, e.clientY - 60));
-  // small floats burst
-  for(let i=0;i<3;i++){ setTimeout(()=> { createFloat(['balloon','heart','flower'][Math.floor(Math.random()*3)]) }, i*120); }
-  // try audio
-  if(audioCtx && audioCtx.state === 'suspended'){ audioCtx.resume().then(()=> playHappyBirthday()); }
-});
-
-/* ---------- Accessibility: respect reduced-motion by disabling heavy auto loops ---------- */
-if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-  // stop float spawns, stop scheduled fireworks
-  // minimal scene: single static starfield - achieved by not scheduling new spawns
-  // remove all setIntervals by not creating them (above code still created some)
-  // For safety, we will stop the intensive loops: cancel auto scheduler by overriding
-  // (here we keep only the initial bursts)
-  // Note: browsers will not always support removing existing intervals easily here; the UX will still be calmer.
-}
-
-/* ---------- helper: gentle initial floats to set the mood ---------- */
-for(let i=0;i<6;i++){
-  setTimeout(()=> createFloat(['balloon','heart','flower'][Math.floor(Math.random()*3)]), i*260);
-}
-
-// small helper to re-init on resize (keep particle positions relative)
-window.addEventListener('resize', ()=> {
-  initStars();
-});
-
-</script>
+    // Floating emojis (flowers, hearts, balloons)
+    const emojis = ["🌸","🌹","🌼","🎈","💖","💝"];
+    function createFloatingEmoji() {
+      const emoji = document.createElement("div");
+      emoji.className = "floating";
+      emoji.style.left = Math.random() * window.innerWidth + "px";
+      emoji.style.fontSize = (Math.random() * 30 + 20) + "px";
+      emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      document.body.appendChild(emoji);
+      setTimeout(() => emoji.remove(), 10000);
+    }
+    setInterval(createFloatingEmoji, 1200);
+  </script>
 </body>
 </html>
