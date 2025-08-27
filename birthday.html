@@ -1,0 +1,38 @@
+audioCtx = new (window.AudioContext||window.webkitAudioContext)(); master = audioCtx.createGain(); master.connect(audioCtx.destination); master.gain.value=0.6;
+    const A4=440; const sem=n=>A4*Math.pow(2,n/12);
+    const N = {
+      C5:sem(3), D5:sem(5), E5:sem(7), F5:sem(8), G5:sem(10), A5:sem(12), B5:sem(14),
+      C6:sem(15), D6:sem(17), E6:sem(19), F6:sem(20), G6:sem(22)
+    };
+    const seq = [
+      [N.G5,.36],[N.G5,.24],[N.A5,.6],[N.G5,.6],[N.C6,.6],[N.B5,1.2],
+      [N.G5,.36],[N.G5,.24],[N.A5,.6],[N.G5,.6],[N.D6,.6],[N.C6,1.2],
+      [N.G5,.36],[N.G5,.24],[N.G6,.6],[N.E6,.6],[N.C6,.6],[N.B5,.6],[N.A5,1.2],
+      [N.F6,.36],[N.F6,.24],[N.E6,.6],[N.C6,.6],[N.D6,.6],[N.C6,1.2]
+    ];
+    const start = audioCtx.currentTime + 0.05; let t=start;
+    for(const [f,d] of seq){ note(f,t,d,'triangle'); t+=d*1.05 }
+    setTimeout(()=>{ playing=false; playBtn.textContent='▶️ Play Song'; }, (t-start)*1000+200);
+  }
+  playBtn.addEventListener('click', playSong);
+
+  /* ===== Buttons ===== */
+  document.getElementById('fireworks').addEventListener('click', ()=> shootConfetti(rand(80, innerWidth-80)) );
+  document.getElementById('spawnBalloon').addEventListener('click', ()=> burstBalloons() );
+  document.getElementById('spawnHearts').addEventListener('click', ()=> burstHearts() );
+  document.getElementById('spawnFlowers').addEventListener('click', ()=> burstFlowers() );
+
+  /* ===== Toast helper ===== */
+  const toastEl = document.getElementById('toast');
+  function toast(msg){ toastEl.textContent = msg; toastEl.classList.remove('show'); void toastEl.offsetWidth; toastEl.classList.add('show'); }
+
+  /* ===== Main RAF loop for canvases ===== */
+  function tick(t){ fctx.clearRect(0,0,fx.width,fx.height); stepConfetti(); drawConfetti(); drawStars(t); requestAnimationFrame(tick) }
+
+  /* ===== Init ===== */
+  const fxEl = document.getElementById('fx');
+  resize(); initStars(); burstBalloons(10); burstHearts(10); setTimeout(()=>shootConfetti(innerWidth*.5), 800);
+  requestAnimationFrame(tick);
+
+  </script></body>
+</html>
